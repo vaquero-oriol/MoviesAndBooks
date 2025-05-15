@@ -1,0 +1,73 @@
+
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+## Salidas de compilación
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+## Caché / opciones de VS
+.vs/
+
+## Resultados de pruebas
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+*.trx
+
+## Logs y bases de datos locales
+*.log
+*.dbmdl
+
+## Archivos de configuración
+appsettings.json
+appsettings.*.json
+
+## Secretos de usuario
+secrets.json
+*.UserSecrets.json
+
+## Variables de entorno locales
+.env
+*.local
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+## Rider
+.idea/
+
+## Dependencias
+node_modules/
+
+## Build outputs
+dist/
+build/
+
+## Caché de Angular CLI
+.angular/
+
+## Reportes de cobertura
+coverage/
+
+## Logs de npm/yarn
+npm-debug.log*
+yarn-error.log*
+
+
+## Archivos de sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,7 @@
+.mat-toolbar{
+    background: #21242e;
+    color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;    
+}

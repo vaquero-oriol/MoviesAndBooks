@@ -1,4 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+html {
+  height: 100%;
+  width: 100%;
+  background-color:white;
+}
+
+.my-snackbar-green.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+  color: lightgreen !important;
+  --mat-text-button-state-layer-color: currentColor;
+  --mat-text-button-ripple-color: currentColor;
+}

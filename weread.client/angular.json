@@ -68,6 +68,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.js",
+            "ssl": true,
+            "sslKey": "/home/enderv/.aspnet/https/weread.client.key",
+            "sslCert": "/home/enderv/.aspnet/https/weread.client.pem"
+          },
           "configurations": {
             "production": {
               "buildTarget": "weread.client:build:production"
@@ -76,11 +82,7 @@
               "buildTarget": "weread.client:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "proxyConfig": "src/proxy.conf.js",
-            "port": 51101
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"
@@ -109,5 +111,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

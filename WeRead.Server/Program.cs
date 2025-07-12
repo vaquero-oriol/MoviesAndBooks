@@ -15,12 +15,8 @@ builder.Services.AddHttpClient<BookRepo>((provider, client) =>
     client.BaseAddress = new Uri(tmdbConfig["Header"]!);
 
 
-    // Debug: Verifica en consola
-    Console.WriteLine($" HttpClient configurado:");
-    Console.WriteLine($"BaseAddress: {client.BaseAddress}");
-    Console.WriteLine($"Token Header: {client.DefaultRequestHeaders.Authorization}");
 });
-builder.Services.AddScoped<TmbdService>();
+builder.Services.AddScoped<ObtainBookService>();
 
 builder.Services.Configure<JsonSerializerOptions>(options => {
     options.PropertyNameCaseInsensitive = true;
@@ -31,8 +27,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy",
         builder => builder
             .WithOrigins(
-                "https://localhost:51101",  
-                "http://localhost:51101"   
+                "https://localhost:4200",  
+                "http://localhost:4200"   
             )
             .AllowAnyMethod()
             .AllowAnyHeader()

@@ -4,9 +4,10 @@
     <h1>{{ pelicula.title || pelicula.titulo }}</h1>
     <p>{{ pelicula.description || pelicula.overview }}</p>
     <!-- Asumiendo que 'image' o 'poster_path' es la propiedad que contiene la URL de la imagen -->
-    <img [src]="pelicula.posterUrl" 
+    <img [src]="pelicula.Imagen||pelicula.imagen"
          [alt]="pelicula.titulo"
          class="movie-poster">
+
   </div>
   <div *ngIf="!pelicula">
     <p>Cargando datos de la película...</p>

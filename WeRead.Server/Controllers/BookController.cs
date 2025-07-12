@@ -15,7 +15,7 @@ public class BookController : Controller
     }
 
 
-    [HttpGet("GetBookByName/{name:alpha}")]
+    [HttpGet("GetBookByName/{name}")]
     public async Task<IActionResult> SearchbookByName(string name)
     {
         var libro= await _obtainBookService.ObtenerLibro(name);

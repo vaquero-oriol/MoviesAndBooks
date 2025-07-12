@@ -1,4 +1,6 @@
+using System.Linq.Expressions;
 using System.Net.Http.Json;
+using System.Text.Json;
 using Core;
 using CSharpFunctionalExtensions;
 
@@ -9,7 +11,7 @@ public class BookRepo
     private static string querySearch ="?title=";
     private readonly HttpClient _httpClient;
 
-    private BookRepo(HttpClient httpClient)
+    public BookRepo(HttpClient httpClient)
     {
         _httpClient = httpClient;
         
@@ -17,14 +19,24 @@ public class BookRepo
 
     public async Task<Result<Libro>> ObtenerLibro(string name)
     {
-        string url=_httpClient.BaseAddress.ToString();
+        string url = _httpClient.BaseAddress.ToString() + querySearch;
         
         
         string []elements=name.Split(" ");
 
         foreach (var element in elements)
         {
-            url += elements + "+";
+            if(element==elements[elements.Length-1])
+            {
+                url += element;
+                break;
+                
+            }
+            else
+            {
+                url += element + "+";   
+            }
+            
             
         }
         
@@ -37,15 +49,39 @@ public class BookRepo
         var response= await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
 
+        var resultado = await response.Content
+            .ReadFromJsonAsync<OpenLibrarySearchResult>(new JsonSerializerOptions {
+                PropertyNameCaseInsensitive = true
+            });
+        
+        var doc = resultado?.Docs?.FirstOrDefault();
+        if (doc == null)
+            return Result.Failure<Libro>("No se encontró ningún libro con ese título");
+        
+        string imagenUrl = doc.CoverId.HasValue
+            ? $"https://covers.openlibrary.org/b/id/{doc.CoverId}-L.jpg"
+            : "";
 
-        var book = await response.Content.ReadFromJsonAsync<Libro>();
-
-        if (book == null)
+        var descripcion = "";
+        if (doc.FirstSentence is null)
         {
-            return Result.Failure<Libro>($"No se ha podido obtener el libro con nombre: {name}");
-            
+            var libro = Libro.Reconstruir(doc.Key, doc.Title,
+                descripcion,
+                doc.Authors.FirstOrDefault(), imagenUrl);
+            return Result.Success(libro);    
+
         }
-        return Result.Success(book);    
+        else
+        {
+            
+            var libro = Libro.Reconstruir(doc.Key, doc.Title,
+                doc.FirstSentence.FirstOrDefault(),
+                doc.Authors.FirstOrDefault(), imagenUrl);
+        
+            return Result.Success(libro); 
+        }
+
+      
         }
         catch (Exception ex)
         {

@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MovieServiceService {
-  private apiUrl = 'https://localhost:7251/api/Movie';
+  private apiUrl = 'https://localhost:7251/api/Book';
 
 
   constructor(private http: HttpClient) {}
 
-  getPelicula(id: number) {
-    return this.http.get(`${this.apiUrl}/GetMovieById/${id}`);
+  getPelicula(name: string) {
+    return this.http.get(`${this.apiUrl}/GetBookByName/${name}`);
   }
 }

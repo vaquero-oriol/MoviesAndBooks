@@ -2,6 +2,7 @@ namespace Core;
 
 public class Libro
 {
+
     private Libro(long id, string titulo,string descripcion,string autor, string imagen)
     {
         Id = id;

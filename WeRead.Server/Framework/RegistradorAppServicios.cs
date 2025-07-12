@@ -8,7 +8,7 @@ namespace WebApi.Framework
     {
         public static void AddAppServicios(this IServiceCollection servicios)
         {
-            var assembly = Assembly.GetAssembly(typeof(TmbdService));
+            var assembly = Assembly.GetAssembly(typeof(ObtainBookService));
 
             var typesFromAssembly =
                 assembly!.DefinedTypes.Where(x =>
@@ -36,7 +36,7 @@ namespace WebApi.Framework
 
         public static void AddRepositorios(this IServiceCollection servicios)
         {
-            var assembly = Assembly.GetAssembly(typeof(MovieRepo));
+            var assembly = Assembly.GetAssembly(typeof(BookRepo));
 
             var typesFromAssembly =
                 assembly!.DefinedTypes.Where(x =>

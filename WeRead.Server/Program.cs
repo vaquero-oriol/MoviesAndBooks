@@ -7,14 +7,13 @@ using WebApi.Framework;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddHttpClient<MovieRepo>((provider, client) =>
+builder.Services.AddHttpClient<BookRepo>((provider, client) =>
 {
     var config = provider.GetRequiredService<IConfiguration>();
-    var tmdbConfig = config.GetSection("TMDB");
+    var tmdbConfig = config.GetSection("Config");
 
-    client.BaseAddress = new Uri(tmdbConfig["BaseUrl"]!);
-    client.DefaultRequestHeaders.Authorization =
-        new AuthenticationHeaderValue("Bearer", tmdbConfig["AccessTokenV4"]!);
+    client.BaseAddress = new Uri(tmdbConfig["Header"]!);
+
 
     // Debug: Verifica en consola
     Console.WriteLine($" HttpClient configurado:");
